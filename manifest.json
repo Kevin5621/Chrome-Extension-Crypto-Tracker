@@ -3,18 +3,18 @@
     "name": "My Crypto Price Tracker",
     "version": "1.0",
     "description": "A Chrome extension to track cryptocurrency prices.",
-    "permissions": ["storage", "notifications"],
+    "permissions": ["storage"],
     "action": {
       "default_popup": "index.html",
       "default_icon": {
-        "16": "public/icon.png",
-        "48": "public/icon.png",
-        "128": "public/icon.png"
+        "16": "icon.png",
+        "48": "icon.png",
+        "128": "icon.png"
       }
     },
     "icons": {
-      "16": "public/icon.png",
-      "48": "public/icon.png",
-      "128": "public/icon.png"
+      "16": "icon.png",
+      "48": "icon.png",
+      "128": "icon.png"
     }
   }
