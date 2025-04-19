@@ -19,11 +19,19 @@ const CryptoTracker: React.FC = () => {
 
   // Load crypto list on component mount
   useEffect(() => {
+    let isMounted = true;
+    
     const fetchCryptoList = async () => {
-      const list = await loadCryptoList();
-      setCryptoList(list);
-      if (list.length > 0) {
-        updateAllPrices(list);
+      try {
+        const list = await loadCryptoList();
+        if (isMounted) {
+          setCryptoList(list);
+          if (list.length > 0) {
+            updateAllPrices(list);
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching crypto list:', error);
       }
     };
     
@@ -31,31 +39,46 @@ const CryptoTracker: React.FC = () => {
     
     // Set up interval for price updates
     const intervalId = setInterval(() => {
-      updateAllPrices(cryptoList);
+      if (isMounted) {
+        updateAllPrices();
+      }
     }, 15000);
     
-    return () => clearInterval(intervalId);
+    return () => {
+      isMounted = false;
+      clearInterval(intervalId);
+    };
   }, []);
-
-  // Update all crypto prices
-  const updateAllPrices = async (list: CryptoData[] = cryptoList) => {
-    const updatedList = await Promise.all(
-      list.map(async (crypto) => {
-        const newPrice = await getCryptoPrice(crypto.symbol);
-        if (newPrice) {
-          return {
-            ...crypto,
-            previousPrice: crypto.price,
-            price: newPrice,
-            lastUpdated: Date.now()
-          };
-        }
-        return crypto;
-      })
-    );
+  
+  const updateAllPrices = async (list?: CryptoData[]) => {
+    const currentList = list || cryptoList;
+    if (!currentList || currentList.length === 0) return;
     
-    setCryptoList(updatedList);
-    saveCryptoList(updatedList);
+    try {
+      const updatedList = await Promise.all(
+        currentList.map(async (crypto) => {
+          try {
+            const newPrice = await getCryptoPrice(crypto.symbol);
+            if (newPrice) {
+              return {
+                ...crypto,
+                previousPrice: crypto.price,
+                price: newPrice,
+                lastUpdated: Date.now()
+              };
+            }
+            return crypto;
+          } catch {
+            return crypto;
+          }
+        })
+      );
+      
+      setCryptoList(updatedList);
+      await saveCryptoList(updatedList);
+    } catch (error) {
+      console.error('Error updating prices:', error);
+    }
   };
 
   // Add new crypto

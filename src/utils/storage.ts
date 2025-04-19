@@ -1,35 +1,46 @@
 import { CryptoData } from '../types';
 
-/**
- * Saves the crypto list to Chrome storage
- * @param cryptoList The list of cryptocurrencies to save
- */
+const STORAGE_KEY = 'cryptoTracker_cryptoList';
+
 export function saveCryptoList(cryptoList: CryptoData[]): Promise<void> {
   return new Promise((resolve) => {
-    chrome.storage.local.set({ cryptoList: JSON.stringify(cryptoList) }, () => {
+    try {
+      // Stringify with better error handling
+      const dataToStore = JSON.stringify(cryptoList);
+      localStorage.setItem(STORAGE_KEY, dataToStore);
+      
+      // Verify data was actually stored
+      const verification = localStorage.getItem(STORAGE_KEY);
+      if (!verification) {
+        console.error('Storage verification failed: Data not saved');
+      }
+      
       resolve();
-    });
+    } catch (error) {
+      console.error('Error saving crypto list:', error);
+      resolve();
+    }
   });
 }
 
-/**
- * Loads the crypto list from Chrome storage
- * @returns A promise that resolves to the loaded crypto list
- */
 export function loadCryptoList(): Promise<CryptoData[]> {
   return new Promise((resolve) => {
-    chrome.storage.local.get('cryptoList', (result) => {
-      if (result.cryptoList) {
-        try {
-          const parsedList = JSON.parse(result.cryptoList);
+    try {
+      const savedList = localStorage.getItem(STORAGE_KEY);
+      if (savedList) {
+        const parsedList = JSON.parse(savedList);
+        // Validate that we got an array
+        if (Array.isArray(parsedList)) {
           resolve(parsedList);
-        } catch (e) {
-          console.error('Failed to parse saved crypto list');
-          resolve([]);
+          return;
+        } else {
+          console.error('Loaded data is not an array:', parsedList);
         }
-      } else {
-        resolve([]);
       }
-    });
+      resolve([]);
+    } catch (error) {
+      console.error('Error loading crypto list:', error);
+      resolve([]); // Default to empty array on error
+    }
   });
 }
