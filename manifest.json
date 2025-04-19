@@ -5,7 +5,7 @@
   "description": "Track cryptocurrency prices from the browser side panel",
   "permissions": ["sidePanel", "storage"],
   "side_panel": {
-    "default_path": "src/sidepanel.html"
+    "default_path": "index.html"
   },
   "background": {
     "service_worker": "src/background.js"
