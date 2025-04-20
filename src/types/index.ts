@@ -21,3 +21,28 @@ export interface Portfolio {
   items: PortfolioItem[];
   lastUpdated: number;
 }
+
+export interface CoinData {
+  symbol: string;
+  baseAsset: string;
+  quoteAsset: string;
+  volume: number;
+  price: string;
+  priceChangePercent: number;
+  isTrending?: boolean;
+}
+
+export interface UserHistoryItem {
+  count: number;
+  lastSearched: number;
+}
+
+export interface UserSearchHistory {
+  [symbol: string]: UserHistoryItem;
+}
+
+export interface SearchResult {
+  symbol: string;
+  score: number;
+  matchType: 'exact' | 'prefix' | 'fuzzy' | 'popular' | 'history' | 'trending';
+}

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { PortfolioItem, Portfolio, CryptoData } from '../types';
 import { getCryptoPrice } from '../utils/api';
 import { loadPortfolio, savePortfolio } from '../utils/portfolioStorage';
+import CryptoAutocomplete from './CryptoAutocomplete';
 
 // SVG icons
 const portfolioIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>`;
@@ -259,11 +260,11 @@ const PortfolioTracker: React.FC<PortfolioTrackerProps> = ({ }) => {
       
       <div className="add-portfolio-item">
         <div className="form-row">
-          <input
-            type="text"
-            placeholder="Crypto Symbol (e.g. BTC)"
-            value={symbol}
-            onChange={(e) => setSymbol(e.target.value)}
+          <CryptoAutocomplete
+            onSelect={(value) => setSymbol(value)}
+            placeholder="Enter crypto symbol (e.g. BTC)"
+            validateOnSelect={true}
+            position="top" 
           />
         </div>
         <div className="form-row">

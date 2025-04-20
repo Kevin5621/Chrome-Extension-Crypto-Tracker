@@ -4,6 +4,7 @@ import { getCryptoPrice } from '../utils/api';
 import { saveCryptoList, loadCryptoList } from '../utils/storage';
 import { formatPrice, getTrend } from '../utils/formatters';
 import PortfolioTracker from './PortfolioTracker';
+import CryptoAutocomplete from './CryptoAutocomplete';
 
 // SVG icons
 const cryptoIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 6v2m0 8v2"/></svg>`;
@@ -118,18 +119,6 @@ const CryptoTracker: React.FC = () => {
     saveCryptoList(updatedList);
   };
 
-  // Handle input change
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value);
-  };
-
-  // Handle key press
-  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      addCrypto();
-    }
-  };
-
   // Render crypto list
   const renderCryptoList = () => {
     if (cryptoList.length === 0) {
@@ -195,15 +184,16 @@ const CryptoTracker: React.FC = () => {
                 {renderCryptoList()}
               </div>
             </div>
-            
+                        
             <div className="add-crypto">
-              <input
-                type="text"
-                id="cryptoInput"
+              <CryptoAutocomplete 
+                onSelect={(symbol) => {
+                  setInputValue(symbol);
+                  addCrypto();
+                }}
                 placeholder="Enter crypto symbol (e.g. BTC)"
-                value={inputValue}
-                onChange={handleInputChange}
-                onKeyPress={handleKeyPress}
+                validateOnSelect={true}
+                position="top"
               />
               <button id="addCrypto" onClick={addCrypto}>Add</button>
             </div>

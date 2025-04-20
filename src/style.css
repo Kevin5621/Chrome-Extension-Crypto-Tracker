@@ -354,3 +354,130 @@ button:hover {
 .form-row input {
   flex: 1;
 }
+
+/* Autocomplete Component Styles */
+.crypto-autocomplete {
+  position: relative;
+  width: 100%;
+}
+
+.search-input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  position: absolute;
+  left: 10px;
+  color: var(--text-secondary);
+}
+
+.search-input {
+  width: 100%;
+  padding: 8px 10px 8px 32px;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  font-size: 0.85rem;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+.loading-spinner {
+  position: absolute;
+  right: 10px;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  border-top-color: var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Dropdown positioning */
+.search-results-dropdown {
+  position: absolute;
+  left: 0;
+  right: 0;
+  max-height: 300px;
+  overflow-y: auto;
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  z-index: 10;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Dropdown di bawah input (default) */
+.dropdown-bottom {
+  top: 100%;
+  margin-top: 4px;
+}
+
+/* Dropdown di atas input */
+.dropdown-top {
+  bottom: 100%;
+  margin-bottom: 4px;
+}
+
+.search-result-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.search-result-item:last-child {
+  border-bottom: none;
+}
+
+.search-result-item:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.result-symbol {
+  font-weight: 500;
+}
+
+.result-type {
+  display: flex;
+  align-items: center;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.result-icon {
+  margin-right: 4px;
+}
+
+.no-results {
+  padding: 12px;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+
+/* Tambahkan di bagian Autocomplete Component Styles */
+
+.invalid-symbol {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background-color: rgba(255, 0, 0, 0.05);
+}
+
+.validation-error {
+  color: #ff5252;
+  font-size: 0.7rem;
+  margin-left: 8px;
+}
