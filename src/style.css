@@ -243,3 +243,114 @@ button:hover {
 .crypto-item {
   animation: fadeIn 0.2s ease-out;
 }
+
+
+/* Tambahkan di akhir file style.css */
+
+/* Portfolio styles */
+.portfolio-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.portfolio-summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 16px;
+  padding: 0 10px;
+}
+
+.summary-item {
+  background-color: var(--card-bg);
+  border-radius: var(--border-radius);
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border-color);
+}
+
+.summary-label {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+}
+
+.summary-value {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.portfolio-items {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.portfolio-item {
+  background-color: var(--card-bg);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-color);
+  padding: 12px;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.item-symbol {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.item-details {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.item-detail {
+  display: flex;
+  flex-direction: column;
+}
+
+.detail-label {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.detail-value {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.profit {
+  color: #10b981;
+}
+
+.loss {
+  color: #ef4444;
+}
+
+.add-portfolio-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px;
+  border-top: 1px solid var(--border-color);
+  background-color: var(--card-bg);
+}
+
+.form-row {
+  display: flex;
+  gap: 6px;
+}
+
+.form-row input {
+  flex: 1;
+}
