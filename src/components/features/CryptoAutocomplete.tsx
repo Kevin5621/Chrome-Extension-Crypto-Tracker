@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { CoinData, UserSearchHistory, SearchResult } from '../types';
-import { searchCoins, initializeSearchEngine } from '../utils/searchUtils';
-import { loadCoinList, loadSearchHistory, updateSearchHistory } from '../utils/coinStorage';
-import { getAllCoinPairs, isValidTradingPair } from '../utils/api';
+import { CoinData, UserSearchHistory, SearchResult } from '../../types';
+import { searchCoins, initializeSearchEngine } from '../../utils/searchUtils';
+import { loadCoinList, loadSearchHistory, updateSearchHistory } from '../../utils/coinStorage';
+import { getAllCoinPairs, isValidTradingPair } from '../../utils/api';
 
 // SVG icons
 const searchIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>`;
@@ -35,7 +35,7 @@ const CryptoAutocomplete: React.FC<CryptoAutocompleteProps> = ({
   
   const inputRef = useRef<HTMLInputElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const debounceTimerRef = useRef<number | null>(null);
+  const debounceTimerRef = useRef<NodeJS.Timeout | null>(null);
   
   // Mengukur tinggi dropdown untuk positioning yang tepat
   useEffect(() => {
