@@ -27,18 +27,39 @@ export function loadPortfolio(): Promise<Portfolio> {
       const savedPortfolio = localStorage.getItem(PORTFOLIO_STORAGE_KEY);
       if (savedPortfolio) {
         const parsedPortfolio = JSON.parse(savedPortfolio);
-        if (parsedPortfolio && Array.isArray(parsedPortfolio.items)) {
+        
+        // Handle old format (with items array)
+        if (parsedPortfolio && Array.isArray(parsedPortfolio.items) && !parsedPortfolio.wallets) {
+          // Convert to new format
+          const migratedPortfolio: Portfolio = {
+            wallets: [{ id: 'default', name: 'Default Wallet', items: parsedPortfolio.items }],
+            lastUpdated: parsedPortfolio.lastUpdated || Date.now()
+          };
+          resolve(migratedPortfolio);
+          return;
+        }
+        
+        // Handle new format (with wallets array)
+        if (parsedPortfolio && Array.isArray(parsedPortfolio.wallets)) {
           resolve(parsedPortfolio);
           return;
         } else {
           console.error('Loaded portfolio data is invalid:', parsedPortfolio);
         }
       }
-      // Default empty portfolio
-      resolve({ items: [], lastUpdated: Date.now() });
+      
+      // Default empty portfolio with new structure
+      resolve({ 
+        wallets: [{ id: 'default', name: 'Default Wallet', items: [] }],
+        lastUpdated: Date.now() 
+      });
     } catch (error) {
       console.error('Error loading portfolio:', error);
-      resolve({ items: [], lastUpdated: Date.now() });
+      // Default empty portfolio with new structure
+      resolve({ 
+        wallets: [{ id: 'default', name: 'Default Wallet', items: [] }],
+        lastUpdated: Date.now() 
+      });
     }
   });
 }

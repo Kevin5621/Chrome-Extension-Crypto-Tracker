@@ -17,8 +17,17 @@ export interface PortfolioItem {
   purchaseDate: number;
 }
 
-export interface Portfolio {
+// Add this to your existing types file
+export interface Wallet {
+  id: string;
+  name: string;
   items: PortfolioItem[];
+}
+
+// Update the Portfolio interface
+export interface Portfolio {
+  items?: PortfolioItem[];
+  wallets: Wallet[];
   lastUpdated: number;
 }
 
