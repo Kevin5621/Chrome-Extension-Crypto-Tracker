@@ -31,6 +31,15 @@ export function getTrend(current: string, previous: string | null): string {
   return '';
 }
 
+/**
+ * Formats a percentage value for display
+ * @param value The percentage value to format
+ * @returns Formatted percentage string with fixed 2 decimal places
+ */
+export function formatPercentage(value: number): string {
+  return value.toFixed(2);
+}
+
 export function formatLargeNumber(num: number): string {
   if (num >= 1_000_000_000) {
     return `${(num / 1_000_000_000).toFixed(2)}B`;

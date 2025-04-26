@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { CryptoData } from '../../types';
 import { getCryptoPrice, getCoinDetails } from '../../utils/api';
 import { saveCryptoList } from '../../utils/storage';
-import { formatPrice, getTrend, formatLargeNumber } from '../../utils/formatters';
+import { formatPrice, formatPercentage, formatLargeNumber } from '../../utils/formatters';
 import CryptoAutocomplete from '../features/CryptoAutocomplete';
 
 // SVG icons
@@ -35,13 +35,13 @@ const CryptoPricesList: React.FC<CryptoPricesListProps> = ({
     
     // Check if already exists
     if (cryptoList.some(crypto => crypto.symbol === symbol)) {
-      alert(`${symbol} is already in your list.`);
+      alert(`${symbol} sudah ada dalam daftar.`);
       return;
     }
     
     const price = await getCryptoPrice(symbol);
     if (!price) {
-      alert(`Could not find price for ${symbol}. Please check the symbol and try again.`);
+      alert(`Tidak dapat menemukan harga untuk ${symbol}. Periksa kembali simbol dan coba lagi.`);
       return;
     }
     
@@ -104,7 +104,8 @@ const CryptoPricesList: React.FC<CryptoPricesListProps> = ({
               volume24h: details.volume,
               high24h: details.high24h,
               low24h: details.low24h,
-              priceHistory: details.priceHistory
+              priceHistory: details.priceHistory,
+              priceChange24h: details.priceChange24h
             };
           }
           return crypto;
@@ -118,6 +119,17 @@ const CryptoPricesList: React.FC<CryptoPricesListProps> = ({
     } finally {
       setLoadingDetails(prev => ({...prev, [symbol]: false}));
     }
+  };
+
+  // Calculate price percentage change
+  const getPriceChangePercent = (crypto: CryptoData) => {
+    if (!crypto.priceHistory || crypto.priceHistory.length < 2) {
+      return crypto.priceChange24h || 0;
+    }
+    
+    const currentPrice = parseFloat(crypto.price);
+    const oldPrice = crypto.priceHistory[0].price;
+    return ((currentPrice - oldPrice) / oldPrice) * 100;
   };
 
   // Render price chart
@@ -206,8 +218,8 @@ const CryptoPricesList: React.FC<CryptoPricesListProps> = ({
       return (
         <div className="empty-state" dangerouslySetInnerHTML={{ __html: `
           ${emptyIcon}
-          <p>No cryptocurrencies added yet.</p>
-          <p>Add your first one below!</p>
+          <p>Belum ada cryptocurrency yang ditambahkan.</p>
+          <p>Tambahkan yang pertama di bawah!</p>
         `}} />
       );
     }
@@ -218,30 +230,37 @@ const CryptoPricesList: React.FC<CryptoPricesListProps> = ({
     return sortedList.map((crypto) => {
       if (!crypto.price) return null;
       
-      const trend = getTrend(crypto.price, crypto.previousPrice);
       const formattedPrice = formatPrice(crypto.price);
+      const percentChange = getPriceChangePercent(crypto);
+      const isPriceUp = percentChange >= 0;
       
       return (
         <div key={crypto.symbol} className="crypto-item">
           <div className="crypto-header">
             <div className="crypto-info">
-              <span className="crypto-symbol">{crypto.symbol}</span>
-              <span className="crypto-price">${formattedPrice}</span>
-              <span dangerouslySetInnerHTML={{ __html: trend }} />
-            </div>
-            <div className="crypto-actions">
-              <button 
-                className="expand-btn" 
-                title={crypto.isExpanded ? "Collapse" : "Expand"}
-                onClick={() => toggleExpand(crypto.symbol)}
-                dangerouslySetInnerHTML={{ __html: crypto.isExpanded ? collapseIcon : expandIcon }}
-              />
-              <button 
-                className="remove-btn" 
-                title={`Remove ${crypto.symbol}`}
-                onClick={() => removeCrypto(crypto.symbol)}
-                dangerouslySetInnerHTML={{ __html: removeIcon }}
-              />
+              <div className="crypto-main-info">
+                <span className="crypto-symbol">{crypto.symbol}</span>
+                <div className="crypto-actions">
+                  <button 
+                    className="expand-btn" 
+                    title={crypto.isExpanded ? "Tutup" : "Lihat detail"}
+                    onClick={() => toggleExpand(crypto.symbol)}
+                    dangerouslySetInnerHTML={{ __html: crypto.isExpanded ? collapseIcon : expandIcon }}
+                  />
+                  <button 
+                    className="remove-btn" 
+                    title={`Hapus ${crypto.symbol}`}
+                    onClick={() => removeCrypto(crypto.symbol)}
+                    dangerouslySetInnerHTML={{ __html: removeIcon }}
+                  />
+                </div>
+              </div>
+              <div className="crypto-price-info">
+                <span className="crypto-price">${formattedPrice}</span>
+                <span className={`price-change ${isPriceUp ? 'price-up' : 'price-down'}`}>
+                  {isPriceUp ? '▲' : '▼'} {formatPercentage(Math.abs(percentChange))}%
+                </span>
+              </div>
             </div>
           </div>
           
@@ -263,7 +282,7 @@ const CryptoPricesList: React.FC<CryptoPricesListProps> = ({
         <button 
           id="refreshAll" 
           className="refresh-btn" 
-          title="Refresh all prices"
+          title="Refresh semua harga"
           onClick={() => updateAllPrices()}
           dangerouslySetInnerHTML={{ __html: refreshIcon }}
         />
@@ -281,11 +300,11 @@ const CryptoPricesList: React.FC<CryptoPricesListProps> = ({
             setInputValue(symbol);
             addCrypto();
           }}
-          placeholder="Enter crypto symbol (e.g. BTC)"
+          placeholder="Masukkan simbol crypto (contoh: BTC)"
           validateOnSelect={true}
           position="top"
         />
-        <button id="addCrypto" onClick={addCrypto}>Add</button>
+        <button id="addCrypto" onClick={addCrypto}>Tambah</button>
       </div>
     </>
   );

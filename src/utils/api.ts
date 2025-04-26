@@ -168,6 +168,7 @@ export async function getCoinDetails(symbol: string): Promise<{
   volume: number;
   high24h: number;
   low24h: number;
+  priceChange24h: number;
   priceHistory: {timestamp: number, price: number}[];
 } | null> {
   try {
@@ -202,6 +203,7 @@ export async function getCoinDetails(symbol: string): Promise<{
       volume: parseFloat(data.volume),
       high24h: parseFloat(data.highPrice),
       low24h: parseFloat(data.lowPrice),
+      priceChange24h: parseFloat(data.priceChangePercent),
       priceHistory
     };
   } catch (error) {

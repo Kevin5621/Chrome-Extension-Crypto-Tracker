@@ -56,6 +56,7 @@ export interface CryptoData {
   low24h?: number;
   priceHistory?: {timestamp: number, price: number}[];
   isExpanded?: boolean;
+  priceChange24h?: number;
 }
 
 export interface UserHistoryItem {
