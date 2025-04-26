@@ -39,6 +39,23 @@ export interface CoinData {
   price: string;
   priceChangePercent: number;
   isTrending?: boolean;
+  marketCap?: number;
+  high24h?: number;
+  low24h?: number;
+  priceHistory?: {timestamp: number, price: number}[];
+}
+
+export interface CryptoData {
+  symbol: string;
+  price: string;
+  previousPrice: string | null;
+  lastUpdated: number;
+  marketCap?: number;
+  volume24h?: number;
+  high24h?: number;
+  low24h?: number;
+  priceHistory?: {timestamp: number, price: number}[];
+  isExpanded?: boolean;
 }
 
 export interface UserHistoryItem {

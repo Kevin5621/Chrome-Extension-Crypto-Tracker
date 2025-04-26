@@ -162,3 +162,50 @@ export async function validateSymbols(symbols: string[]): Promise<{
   
   return result;
 }
+
+export async function getCoinDetails(symbol: string): Promise<{
+  marketCap: number;
+  volume: number;
+  high24h: number;
+  low24h: number;
+  priceHistory: {timestamp: number, price: number}[];
+} | null> {
+  try {
+    // Gunakan API publik untuk mendapatkan data detail
+    const response = await fetch(`https://api.binance.com/api/v3/ticker/24hr?symbol=${symbol}USDT`);
+    
+    if (!response.ok) {
+      throw new Error(`Failed to fetch details for ${symbol}`);
+    }
+    
+    const data = await response.json();
+    
+    // Dapatkan data historis harga (kline/candlestick)
+    const historyResponse = await fetch(
+      `https://api.binance.com/api/v3/klines?symbol=${symbol}USDT&interval=1h&limit=24`
+    );
+    
+    if (!historyResponse.ok) {
+      throw new Error(`Failed to fetch price history for ${symbol}`);
+    }
+    
+    const historyData = await historyResponse.json();
+    
+    // Format data historis
+    const priceHistory = historyData.map((candle: any[]) => ({
+      timestamp: candle[0], // Open time
+      price: parseFloat(candle[4]) // Close price
+    }));
+    
+    return {
+      marketCap: parseFloat(data.quoteVolume) * parseFloat(data.lastPrice),
+      volume: parseFloat(data.volume),
+      high24h: parseFloat(data.highPrice),
+      low24h: parseFloat(data.lowPrice),
+      priceHistory
+    };
+  } catch (error) {
+    console.error(`Error fetching details for ${symbol}:`, error);
+    return null;
+  }
+}
