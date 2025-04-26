@@ -28,11 +28,12 @@ h2 {
 }
 
 /* No scrollbar style */
-.no-scrollbar {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+* {
+  -ms-overflow-style: none;  /* Internet Explorer dan Edge */
+  scrollbar-width: none;     /* Firefox */
 }
 
-.no-scrollbar::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
+/* For Chrome, Safari, dan Opera */
+*::-webkit-scrollbar {
+  display: none;
 }
