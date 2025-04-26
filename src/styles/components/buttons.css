@@ -1,0 +1,62 @@
+button {
+  padding: 10px 16px;
+  border-radius: var(--border-radius);
+  border: none;
+  background-color: var(--primary-color);
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: var(--transition);
+}
+
+button:hover {
+  background-color: var(--primary-hover);
+}
+
+.remove-btn {
+  background: transparent;
+  color: var(--text-secondary);
+  padding: 4px;
+  line-height: 0;
+  border-radius: 50%;
+}
+
+.remove-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--danger);
+}
+
+.refresh-btn {
+  background: transparent;
+  color: var(--text-secondary);
+  padding: 5px;
+  margin-left: auto;
+  line-height: 0;
+}
+
+.refresh-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--primary-color);
+}
+
+.expand-btn {
+  background: transparent;
+  color: var(--text-secondary);
+  padding: 4px;
+  line-height: 0;
+  border-radius: 50%;
+}
+
+.expand-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--primary-color);
+}
+
+.remove-wallet-btn {
+  background: transparent;
+  color: var(--text-secondary);
+  padding: 4px;
+  line-height: 0;
+  border-radius: 50%;
+}

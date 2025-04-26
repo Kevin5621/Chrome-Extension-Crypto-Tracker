@@ -1,0 +1,148 @@
+#priceList {
+  margin-bottom: 12px;
+}
+
+.crypto-item {
+  display: flex;
+  flex-direction: column;
+  padding: 14px;
+  margin-bottom: 10px;
+  background-color: var(--card-bg);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-color);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  animation: fadeIn 0.25s ease-out;
+}
+
+.crypto-item:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.crypto-info {
+  width: 100%;
+}
+
+.crypto-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.crypto-main-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.crypto-price-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.crypto-symbol {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.crypto-price {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.price-change {
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.price-up {
+  color: #10b981;
+  background-color: rgba(16, 185, 129, 0.1);
+}
+
+.price-down {
+  color: var(--danger);
+  background-color: rgba(239, 68, 68, 0.1);
+}
+
+.crypto-actions {
+  display: flex;
+  gap: 4px;
+}
+
+.price-trend {
+  margin-left: 6px;
+  font-weight: 500;
+}
+
+.crypto-expanded {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border-color);
+  animation: fadeIn 0.3s ease-out;
+}
+
+.crypto-details {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.price-chart {
+  height: 80px;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.15);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+}
+
+.crypto-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.metric {
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(0, 0, 0, 0.15);
+  padding: 10px;
+  border-radius: var(--border-radius);
+}
+
+.metric-label {
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  margin-bottom: 2px;
+}
+
+.metric-value {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.chart-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80px;
+  background-color: rgba(0, 0, 0, 0.15);
+  border-radius: var(--border-radius);
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+
+.crypto-details-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}

@@ -1,0 +1,77 @@
+.tab-container {
+  display: flex;
+  background-color: var(--inactive-tab);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.tab {
+  padding: 10px 16px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background-color: var(--inactive-tab);
+  border: none;
+  border-right: 1px solid var(--border-color);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.tab.active {
+  background-color: var(--active-tab);
+  color: var(--text-primary);
+}
+
+.tab:hover:not(.active) {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.add-tab {
+  padding: 8px 10px;
+  background-color: var(--inactive-tab);
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  border: none;
+  cursor: pointer;
+}
+
+.add-tab:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Wallet tabs */
+.wallet-selector {
+  margin-bottom: 10px;
+}
+
+.wallet-tabs {
+  display: flex;
+  overflow-x: auto;
+  background-color: var(--inactive-tab);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.wallet-tab {
+  padding: 8px 12px;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.wallet-tab.active {
+  background-color: var(--active-tab);
+}
+
+.add-wallet-btn {
+  padding: 8px 10px;
+  background-color: var(--inactive-tab);
+}
+
+.add-wallet-form {
+  padding: 10px;
+  background-color: var(--card-bg);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  gap: 8px;
+}

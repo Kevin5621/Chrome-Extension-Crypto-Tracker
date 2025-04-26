@@ -1,0 +1,20 @@
+:root {
+  --bg-color: #1e1e1e;
+  --card-bg: #252525;
+  --text-primary: #f3f4f6;
+  --text-secondary: #d1d5db;
+  --primary-color: #6366f1;
+  --primary-hover: #4f46e5;
+  --danger: #ef4444;
+  --danger-hover: #dc2626;
+  --active-tab: #2c2c2c;
+  --inactive-tab: #1a1a1a;
+  --border-color: #333;
+  --border-radius: 4px;
+  --transition: all 0.2s ease;
+  
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-primary);
+}
