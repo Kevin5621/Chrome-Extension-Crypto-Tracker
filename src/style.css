@@ -481,3 +481,101 @@ button:hover {
   font-size: 0.7rem;
   margin-left: 8px;
 }
+
+/* Crypto item dengan expand/collapse */
+.crypto-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.crypto-actions {
+  display: flex;
+  gap: 4px;
+}
+
+.expand-btn {
+  background: transparent;
+  color: var(--text-secondary);
+  padding: 4px;
+  line-height: 0;
+  border-radius: 50%;
+}
+
+.expand-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--primary-color);
+}
+
+.crypto-expanded {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border-color);
+  animation: fadeIn 0.3s ease-out;
+}
+
+.crypto-details {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.price-chart {
+  height: 80px;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+}
+
+.crypto-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.metric {
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(0, 0, 0, 0.1);
+  padding: 6px;
+  border-radius: var(--border-radius);
+}
+
+.metric-label {
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+}
+
+.metric-value {
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.chart-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80px;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: var(--border-radius);
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+}
+
+.crypto-details-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 400px) {
+  .crypto-metrics {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
