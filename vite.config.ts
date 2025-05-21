@@ -11,6 +11,11 @@ export default defineConfig({
         entryFileNames: 'main.js',
         format: 'iife'
       }
-    }
+    },
+    watch: {}
+  },
+  server: {
+    hmr: true,
+    port: 3000
   }
 });
