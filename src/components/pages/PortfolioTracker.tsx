@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { PortfolioItem, Portfolio, CryptoData, Wallet } from '../../types';
 import { getCryptoPrice } from '../../utils/api';
 import { loadPortfolio, savePortfolio } from '../../utils/portfolioStorage';
-import CryptoAutocomplete from '../features/CryptoAutocomplete';
+import AddTransactionForm from '../features/AddTransactionForm';
 
 // SVG icons
 const portfolioIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>`;
@@ -21,9 +21,6 @@ const PortfolioTracker: React.FC<PortfolioTrackerProps> = ({ }) => {
     lastUpdated: Date.now() 
   });
   const [activeWalletId, setActiveWalletId] = useState<string>('default');
-  const [symbol, setSymbol] = useState('');
-  const [amount, setAmount] = useState('');
-  const [purchasePrice, setPurchasePrice] = useState('');
   const [currentPrices, setCurrentPrices] = useState<Record<string, string>>({});
   const [newWalletName, setNewWalletName] = useState('');
   const [isAddingWallet, setIsAddingWallet] = useState(false);
@@ -114,36 +111,7 @@ const PortfolioTracker: React.FC<PortfolioTrackerProps> = ({ }) => {
   };
 
   // Add new portfolio item to active wallet
-  const addPortfolioItem = async () => {
-    const trimmedSymbol = symbol.trim().toUpperCase();
-    const parsedAmount = parseFloat(amount);
-    const parsedPrice = parseFloat(purchasePrice);
-    
-    if (!trimmedSymbol || isNaN(parsedAmount) || isNaN(parsedPrice)) {
-      alert('Please fill in all fields with valid values');
-      return;
-    }
-    
-    // Check if symbol exists
-    const price = await getCryptoPrice(trimmedSymbol);
-    if (!price) {
-      alert(`Could not find price for ${trimmedSymbol}. Please check the symbol and try again.`);
-      return;
-    }
-    
-    // Check if already in active wallet
-    if (activeWallet.items.some(item => item.symbol === trimmedSymbol)) {
-      alert(`${trimmedSymbol} is already in your ${activeWallet.name}.`);
-      return;
-    }
-    
-    const newItem: PortfolioItem = {
-      symbol: trimmedSymbol,
-      amount: parsedAmount,
-      purchasePrice: parsedPrice,
-      purchaseDate: Date.now()
-    };
-    
+  const addPortfolioItem = async (newItem: PortfolioItem) => {
     // Update the active wallet with the new item
     const updatedWallets = portfolio.wallets.map(wallet => {
       if (wallet.id === activeWalletId) {
@@ -165,11 +133,6 @@ const PortfolioTracker: React.FC<PortfolioTrackerProps> = ({ }) => {
     
     // Update current price for the new item
     updateCurrentPrices([newItem]);
-    
-    // Reset form
-    setSymbol('');
-    setAmount('');
-    setPurchasePrice('');
   };
 
   // Remove portfolio item from active wallet
@@ -503,31 +466,11 @@ const PortfolioTracker: React.FC<PortfolioTrackerProps> = ({ }) => {
         {renderPortfolio()}
       </div>
       
-      <div className="add-portfolio-item">
-        <div className="form-row">
-          <CryptoAutocomplete
-            onSelect={(value) => setSymbol(value)}
-            placeholder="Enter crypto symbol (e.g. BTC)"
-            validateOnSelect={true}
-            position="top" 
-          />
-        </div>
-        <div className="form-row">
-          <input
-            type="number"
-            placeholder="Amount"
-            value={amount}
-            onChange={(e) => setAmount(e.target.value)}
-          />
-          <input
-            type="number"
-            placeholder="Purchase Price ($)"
-            value={purchasePrice}
-            onChange={(e) => setPurchasePrice(e.target.value)}
-          />
-        </div>
-        <button onClick={addPortfolioItem}>Add to {activeWallet.name}</button>
-      </div>
+      <AddTransactionForm 
+        onAddItem={addPortfolioItem}
+        walletName={activeWallet.name}
+        existingSymbols={activeWallet.items.map(item => item.symbol)}
+      />
     </div>
   );
 };
