@@ -364,21 +364,25 @@ const PortfolioTracker: React.FC<PortfolioTrackerProps> = ({ }) => {
     if (activeWallet.items.length === 0) {
       return (
         <>
-          <div className="portfolio-total-summary">
-            <h3>Total Portfolio Value</h3>
-            <div className="summary-item">
-              <span className="summary-label">Total Investment</span>
-              <span className="summary-value">${totalMetrics.totalInvestment.toFixed(2)}</span>
-            </div>
-            <div className="summary-item">
-              <span className="summary-label">Current Value</span>
-              <span className="summary-value">${totalMetrics.totalCurrentValue.toFixed(2)}</span>
-            </div>
-            <div className="summary-item">
-              <span className="summary-label">Profit/Loss</span>
-              <span className={`summary-value ${totalMetrics.profitLoss >= 0 ? 'profit' : 'loss'}`}>
-                ${totalMetrics.profitLoss.toFixed(2)} ({totalMetrics.profitLossPercentage.toFixed(2)}%)
-              </span>
+          <div className="portfolio-summary-container">
+            <div className="portfolio-total-summary">
+              <h3>Total Portfolio Value</h3>
+              <div className="summary-grid">
+                <div className="summary-item">
+                  <span className="summary-label">Total Invesment</span>
+                  <span className="summary-value">${totalMetrics.totalInvestment.toFixed(2)}</span>
+                </div>
+                <div className="summary-item">
+                  <span className="summary-label">Current Vallue</span>
+                  <span className="summary-value">${totalMetrics.totalCurrentValue.toFixed(2)}</span>
+                </div>
+                <div className="summary-item">
+                  <span className="summary-label">Profit/Loss</span>
+                  <span className={`summary-value ${totalMetrics.profitLoss >= 0 ? 'profit' : 'loss'}`}>
+                    ${totalMetrics.profitLoss.toFixed(2)} ({totalMetrics.profitLossPercentage.toFixed(2)}%)
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
           
@@ -395,39 +399,45 @@ const PortfolioTracker: React.FC<PortfolioTrackerProps> = ({ }) => {
     
     return (
       <>
-        <div className="portfolio-total-summary">
-          <h3>Total Portfolio Value</h3>
-          <div className="summary-item">
-            <span className="summary-label">Total Investment</span>
-            <span className="summary-value">${totalMetrics.totalInvestment.toFixed(2)}</span>
+        <div className="portfolio-summary-container">
+          <div className="portfolio-total-summary">
+            <h3>Total Portofolio Value</h3>
+            <div className="summary-grid">
+              <div className="summary-item">
+                <span className="summary-label">Total Invesment</span>
+                <span className="summary-value">${totalMetrics.totalInvestment.toFixed(2)}</span>
+              </div>
+              <div className="summary-item">
+                <span className="summary-label">Current Value</span>
+                <span className="summary-value">${totalMetrics.totalCurrentValue.toFixed(2)}</span>
+              </div>
+              <div className="summary-item">
+                <span className="summary-label">Profit/Loss</span>
+                <span className={`summary-value ${totalMetrics.profitLoss >= 0 ? 'profit' : 'loss'}`}>
+                  ${totalMetrics.profitLoss.toFixed(2)} ({totalMetrics.profitLossPercentage.toFixed(2)}%)
+                </span>
+              </div>
+            </div>
           </div>
-          <div className="summary-item">
-            <span className="summary-label">Current Value</span>
-            <span className="summary-value">${totalMetrics.totalCurrentValue.toFixed(2)}</span>
-          </div>
-          <div className="summary-item">
-            <span className="summary-label">Profit/Loss</span>
-            <span className={`summary-value ${totalMetrics.profitLoss >= 0 ? 'profit' : 'loss'}`}>
-              ${totalMetrics.profitLoss.toFixed(2)} ({totalMetrics.profitLossPercentage.toFixed(2)}%)
-            </span>
-          </div>
-        </div>
-        
-        <div className="portfolio-summary">
-          <h3>{activeWallet.name}</h3>
-          <div className="summary-item">
-            <span className="summary-label">Investment</span>
-            <span className="summary-value">${metrics.totalInvestment.toFixed(2)}</span>
-          </div>
-          <div className="summary-item">
-            <span className="summary-label">Current Value</span>
-            <span className="summary-value">${metrics.totalCurrentValue.toFixed(2)}</span>
-          </div>
-          <div className="summary-item">
-            <span className="summary-label">Profit/Loss</span>
-            <span className={`summary-value ${metrics.profitLoss >= 0 ? 'profit' : 'loss'}`}>
-              ${metrics.profitLoss.toFixed(2)} ({metrics.profitLossPercentage.toFixed(2)}%)
-            </span>
+          
+          <div className="portfolio-summary">
+            <h3>{activeWallet.name}</h3>
+            <div className="summary-grid">
+              <div className="summary-item">
+                <span className="summary-label">Investasi</span>
+                <span className="summary-value">${metrics.totalInvestment.toFixed(2)}</span>
+              </div>
+              <div className="summary-item">
+                <span className="summary-label">Nilai Saat Ini</span>
+                <span className="summary-value">${metrics.totalCurrentValue.toFixed(2)}</span>
+              </div>
+              <div className="summary-item">
+                <span className="summary-label">Profit/Loss</span>
+                <span className={`summary-value ${metrics.profitLoss >= 0 ? 'profit' : 'loss'}`}>
+                  ${metrics.profitLoss.toFixed(2)} ({metrics.profitLossPercentage.toFixed(2)}%)
+                </span>
+              </div>
+            </div>
           </div>
         </div>
         

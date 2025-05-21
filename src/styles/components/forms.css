@@ -1,11 +1,12 @@
 input {
   flex: 1;
-  padding: 10px 12px;
+  padding: 12px 14px;
   border-radius: var(--border-radius);
   border: 1px solid var(--border-color);
   background-color: var(--bg-color);
   color: var(--text-primary);
   font-size: 0.9rem;
+  transition: all 0.2s ease;
 }
 
 input:focus {
@@ -14,9 +15,15 @@ input:focus {
   box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
 }
 
+input::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.7;
+}
+
 .form-row {
   display: flex;
-  gap: 6px;
+  gap: 8px;
+  margin-bottom: 8px;
 }
 
 .form-row input {
@@ -26,7 +33,7 @@ input:focus {
 .add-crypto {
   display: flex;
   gap: 10px;
-  padding: 14px;
+  padding: 16px;
   border-top: 1px solid var(--border-color);
   background-color: var(--card-bg);
 }
@@ -34,14 +41,21 @@ input:focus {
 .add-portfolio-item {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  padding: 10px;
+  gap: 10px;
+  padding: 16px;
   border-top: 1px solid var(--border-color);
   background-color: var(--card-bg);
 }
 
+.add-portfolio-item button {
+  padding: 12px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
 .validation-error {
   color: #ff5252;
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   margin-left: 8px;
+  margin-top: 4px;
 }
