@@ -138,3 +138,267 @@
   font-size: 0.95rem;
   margin-bottom: 8px;
 }
+
+/* Floating Add Button */
+.floating-add-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border: none;
+  cursor: pointer;
+  z-index: 100;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.floating-add-btn:hover {
+  transform: scale(1.05);
+  background-color: var(--primary-color-dark);
+}
+
+/* Transaction Dialog */
+.transaction-dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.transaction-dialog {
+  background-color: var(--bg-color);
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  animation: dialog-fade-in 0.3s ease-out;
+}
+
+@keyframes dialog-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dialog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.dialog-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.close-dialog-btn {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-dialog-btn:hover {
+  background-color: var(--hover-color);
+}
+
+/* Transaction Type Selector */
+.transaction-type-selector {
+  display: flex;
+  padding: 12px 20px;
+  gap: 8px;
+}
+
+.type-btn {
+  flex: 1;
+  padding: 8px 12px;
+  border: none;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.type-btn.active {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+/* Crypto Selector */
+.crypto-selector {
+  padding: 12px 20px;
+}
+
+/* Transaction Details */
+.transaction-details {
+  padding: 12px 20px;
+}
+
+.detail-row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.detail-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.detail-column label {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+
+.detail-column input,
+.price-input {
+  padding: 10px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  background-color: var(--input-bg);
+  color: var(--text-primary);
+  font-size: 16px;
+}
+
+.price-input {
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+}
+
+.currency-symbol {
+  color: var(--text-secondary);
+  margin-right: 4px;
+}
+
+.price-input input {
+  border: none;
+  padding: 10px 0;
+  flex: 1;
+  background: transparent;
+}
+
+/* Date, Fee, Notes Row */
+.date-fee-row {
+  display: flex;
+  gap: 8px;
+}
+
+.date-btn,
+.fee-btn,
+.notes-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background-color: var(--bg-secondary);
+  border: none;
+  border-radius: 6px;
+  color: var(--text-secondary);
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.date-btn input[type="date"],
+.fee-btn input,
+.notes-btn input {
+  border: none;
+  background: transparent;
+  color: var(--text-primary);
+  font-size: 14px;
+  padding: 0;
+  margin: 0;
+  width: auto;
+}
+
+.date-btn input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.5);
+}
+
+/* Transaction Total */
+.transaction-total {
+  padding: 16px 20px;
+  background-color: var(--bg-secondary);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.total-label {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.total-amount {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* Add Transaction Button */
+.add-transaction-btn {
+  width: 100%;
+  padding: 14px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.add-transaction-btn:hover {
+  background-color: var(--primary-color-dark);
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .detail-row {
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .date-fee-row {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .date-btn,
+  .fee-btn,
+  .notes-btn {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}

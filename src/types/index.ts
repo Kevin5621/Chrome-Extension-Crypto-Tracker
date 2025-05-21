@@ -15,6 +15,8 @@ export interface PortfolioItem {
   amount: number;
   purchasePrice: number;
   purchaseDate: number;
+  fee?: number;
+  notes?: string;
 }
 
 // Add this to your existing types file
